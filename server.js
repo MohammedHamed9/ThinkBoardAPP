@@ -17,7 +17,11 @@ const limiter=rateLimiter({
 })
 
 app.use(limiter);
+app.get('/', (req, res) => {
+  res.send('Server is running!');
+});
 app.use("/notes",NoteRoutes);
+
 DBconnection.connect(DB).then(()=>{
 app.listen(3000,()=>{
     console.log('SERVER IS RUNNING...')
