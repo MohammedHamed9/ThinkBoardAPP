@@ -1,11 +1,12 @@
 const express=require("express");
-const app=new express();
+const app= express();
 const dotenv=require("dotenv")
 dotenv.config()
 const cors=require("cors")
 const rateLimiter=require("express-rate-limit");
 const NoteRoutes=require("./routes/NoteRoutes")
 const DB=process.env.DB
+const Port=process.env.Port|| 3000
 DBconnection=require("./config/DBconecction")
 app.use(cors());
 
@@ -23,7 +24,7 @@ app.get('/', (req, res) => {
 app.use("/notes",NoteRoutes);
 
 DBconnection.connect(DB).then(()=>{
-app.listen(3000,()=>{
+app.listen(Port,()=>{
     console.log('SERVER IS RUNNING...')
 })
 }).catch((err)=>{
